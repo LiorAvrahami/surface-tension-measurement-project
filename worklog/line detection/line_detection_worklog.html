@@ -1,0 +1,324 @@
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="E:\Liors_Stuff\Experimants\soap solution surface tention\worklog_new\Site_Map.html" >Site Map</a></td>
+</tr>
+</tbody>
+</table>
+<br><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>line_detection_worklog</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="..\default_markdown_style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="work-on-line-detection-algorithm">work on line detection algorithm:</h1>
+<h4 id="introduction">introduction</h4>
+<p>these are the line detection algorithms in chronological order. the original image is denoted with M.<br />
+for example Id(M) = M, and GaussianFilter(<span class="math inline">\sigma=15</span>
+,M) = “a smeared version of M with Gaussian filter of standard deviation 15”.</p>
+<h4 id="origenal-image">origenal image</h4>
+<p>this one is a color image</p>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="im_in_py.jpg" target="_blank"><img src="im_in_py.jpg" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><em>Origenal Image: <span class="math inline">Id(M)</span>
+</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p>*in this document we use the jet color map for scalar - to color comparison.</p>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="colormap.PNG" target="_blank"><img src="colormap.PNG" alt="the jet color map" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;">the jet colormap, left is low value right is high value</td>
+</tr>
+</tbody>
+</table>
+<h4 id="line-detector-v1">line detector v1</h4>
+<p>this and probably all the following ones will be grayscale, printed with colormap=jet</p>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="gaussian%20minus%20identity.png" target="_blank"><img src="gaussian%20minus%20identity.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><em>Line Detector v1: <span class="math inline">Norm(id(M) - GaussianFilter(\sigma=15,M))</span>
+</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p>the idea behind this filter is that it compares the current pixel to the average color of it’s suaroundings. with this filter you expect to find all edges equally.</p>
+<h4 id="color-location-score-v1">color &amp; location score v1:</h4>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="color_identification_v1.png" target="_blank"><img src="color_identification_v1.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><em><span class="math inline">ColorScore\_v1(M)*LocationScore\_v1(M)</span>
+</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p>here is an image of a pixel scoring algorithem that is based on color and location of the pixel. the algorithem slightly prefers pixels that are close to centered around x, and greatly prefers colors that have no hue (to be perfectly honest the most prefered hue was set to be slightly red but mostly gray, because that is the color the the thread). also the top third of the image is removed at this stage because it’s needless calculation.</p>
+<p>!!temp <code>this is some pretty long inline code. yup, code code code. this is code.</code>
+ yup</p>
+<h5 id="specifics-of-location-score">specifics of location score</h5>
+<div class="sourceCode" id="cb1"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>
+y_rel = position[1]/image_size[1]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>
+x_rel_centered = position[0]/image_size[0] - 0.5</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>
+if y_rel &lt;= 0.35:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>
+    return 0</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>
+LocationScore = np.exp(-x_rel_centered**2)</span>
+</code>
+</pre>
+</div>
+<h5 id="specifics-of-color-score">specifics of color score</h5>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>
+# for every pixel the color is stored as RGB in an array called color</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>
+brightness = (color[0] + color[1] + color[2])/3 # between 0 and 1</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>
+red_shift = 0.05</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>
+std_of_hue_diff = 0.06</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>
+hue_score = np.exp(-((color[0]-(brightness+red_shift*2/3))**2+</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>
+                        (color[1]-(brightness-red_shift/3))**2+</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>
+                        (color[2]-(brightness-red_shift/3))**2</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>
+                    )/(2*std_of_hue_diff**2))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>
+brightness_score = 1-brightness</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>
+ColorScore = (hue_score**2)*brightness_score</span>
+</code>
+</pre>
+</div>
+<h4 id="total-pixel-score-v1">total pixel score v1:</h4>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="total%20pixel%20score%20v1.png" target="_blank"><img src="total%20pixel%20score%20v1.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><em><span class="math inline">ColorScore\_v1(M)*LocationScore\_v1(M)*LineDetectorScore\_v1(M)</span>
+</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p>we can see that this a very good start and that the two different methods work together to distinguish the line from the picture.</p>
+<h4 id="line-detector-v2">line detector v2:</h4>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="line_detector_v2.png" target="_blank"><img src="line_detector_v2.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><em><span class="math inline">\frac{\nabla^2(M,dx=5)}{(\nabla(M,dx=10))^2}</span>
+</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p>this line detector is based on first and second derivatives of M. intuitively when trying to detect a dark thin line the first derivative of M will in the area of the line be 0 and the second derivative of M will be very positive (not negative, because the line is darker than it’s surroundings). meanwhile at any other edge (for example the edge of the green plastic) the first derivative will be larger than the second derivative. thus the most sensible thing to do is divide the two.</p>
+<h6 id="in-detail">in detail:</h6>
+<table><colgroup><col style="width: 33%" /><col style="width: 33%" /><col style="width: 33%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="line_detection_v2_specifics/magnitude%20of%20gradiant%20of%20color_dx=10.png" target="_blank"><img src="line_detection_v2_specifics/magnitude%20of%20gradiant%20of%20color_dx=10.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v2_specifics/total%20laplacian%20of%20color_with_dx=5%20with%20negatives.png" target="_blank"><img src="line_detection_v2_specifics/total%20laplacian%20of%20color_with_dx=5%20with%20negatives.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v2_specifics/total%20laplacian%20of%20color_with_dx=5%20minval=0.png" target="_blank"><img src="line_detection_v2_specifics/total%20laplacian%20of%20color_with_dx=5%20minval=0.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">image of magnitude of gradient</td>
+<td style="text-align: center;">image of laplacian</td>
+<td style="text-align: center;">image of positive parts only of laplacian</td>
+</tr>
+<tr class="odd"><td style="text-align: center;">(with minval = 0)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>the laplacian has some very negative values, (which do not bother the edge detection) but as can be seen might bother the printing, so, when printing, I use vmin=0 which sets all the negative values to 0 for the print.</p>
+<h6 id="derivative-calculation-first-and-second">derivative calculation (first and second)</h6>
+<p>the derivative is calculated via convolution with a 2d complex kernel. the 2d complex kernel is just a mathematical trick to allow calculating x and y derivatives at once. so the 2d complex kernel is just a perpendiculat duplication the folowing 1d kernals for 1’st and 2’nd derivatives: <a href="profile%20of%20kernal%20of%20derivetives%20for%20line%20detector%20v2.png" target="_blank"><img src="profile%20of%20kernal%20of%20derivetives%20for%20line%20detector%20v2.png" /></a></p>
+<p>for the second derivative it also makes sense to draw the resaulting 2d kernel <a href="line_detector_v2_2nd_derivetive_kernal.png" target="_blank"><img src="line_detector_v2_2nd_derivetive_kernal.png" /></a></p>
+<h4 id="total-pixel-score-v2">total pixel score v2:</h4>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="total%20pixel%20score%20v2.png" target="_blank"><img src="total%20pixel%20score%20v2.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><span class="math inline">ColorScore\_v1(M)*LocationScore\_v1(M)*LineDetectorScore\_v2(M)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>I do have ideas for improovment, but it seems this is good enough, so I’m gonna start working with this and maybe improve this later.</p>
+<p>I run this on some other image and got results that are just a good: <a href="total%20pixel%20score%20v2_other%20picture.png" target="_blank"><img src="total%20pixel%20score%20v2_other%20picture.png" /></a></p>
+<h4 id="ideas-for-improvment">ideas for improvment:</h4>
+<p>if instead of using the <a href="#derivative-calculation-first-and-second">two convolution kernels in line detector v2</a>
+ we can use only a single kernel, that “fits” the line detection: <a href="profile%20of%20kernal%20of%20line_detectorv3.png" target="_blank"><img src="profile%20of%20kernal%20of%20line_detectorv3.png" /></a> this is what I do in <a href="#line-detection-v36">line detection v3.0 - v3.6</a>
+</p>
+<h4 id="location-score-v2">location score v2:</h4>
+<p>from looking at the images, it seems that I can cut off all the upper half of the image instead of the upper third. so</p>
+<h6 id="specifics-of-location-score-v2">specifics of location score v2:</h6>
+<div class="sourceCode" id="cb3"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>
+    y_rel = position[1]/image_size[1]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>
+    x_rel_centered = position[0]/image_size[0] - 0.5</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>
+    if y_rel &lt;= 0.5:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>
+        return 0</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>
+    LocationScore = np.exp(-x_rel_centered**2)</span>
+</code>
+</pre>
+</div>
+<h4 id="line-detection-v3.6">line detection v3.6:</h4>
+<p>this line detection method hase one paramitter called line_width. it uses foure kernels, one for horisontal lines, two for diagonal lines and one for vertival lines. here is an image of the kernels for differant line_widths: <a href="line_detection_v3_specifics/line%20detection%20v3.5%20fit%20kernels.png" target="_blank"><img src="line_detection_v3_specifics/line%20detection%20v3.5%20fit%20kernels.png" /></a> here is an image of the resulting line detection preformance: <a href="line_detection_v3_specifics/line%20detection%20v3.6.png" target="_blank"><img src="line_detection_v3_specifics/line%20detection%20v3.6.png" /></a></p>
+<p><a href="line_detection_v3_specifics/line_detection_v3_worklog.html">reed more</a>
+</p>
+<h4 id="total-pixel-score-v3">total pixel score v3:</h4>
+<p><a href="total%20pixel%20score%20v3%20vs%20line%20width.png" target="_blank"><img src="total%20pixel%20score%20v3%20vs%20line%20width.png" /></a></p>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="total%20pixel%20score%20v3%20vs%20line%20width_2.png" target="_blank"><img src="total%20pixel%20score%20v3%20vs%20line%20width_2.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><span class="math inline">ColorScore\_v1(M)*LocationScore\_v2(M)*LineDetectorScore\_v3.5(M)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>I manually extracted a binary array that defines the string (the string here is thin, I generally inflate it when needed later): <a href="manual%20string%20location.png" target="_blank"><img src="manual%20string%20location.png" /></a></p>
+<p>with this I can compare the different Performances. I draw a few graphs with some score histograms. the first is a pair of histograms of the absolute number of pixels in each score, in two different regions in the image. the region that is close to the string and the region that is far from the string.<br />
+the second is a pair of density histograms (normalized so that the integral is 1) of the distribution of scores, in two different regions in the image. these two graphs hold the same information, but show it in very different ways.</p>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<thead><tr class="header"><th style="text-align: center;"><a href="histograms%20of%20SNR%20for%20differant%20linewidths%20total_pixel_score_v3.png" target="_blank"><img src="histograms%20of%20SNR%20for%20differant%20linewidths%20total_pixel_score_v3.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;">in blue is the noise, in red is the signal, y axis (log scale) is the amount of pixels in each color, x axis is the score of the pixels</td>
+</tr>
+</tbody>
+</table>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<thead><tr class="header"><th style="text-align: center;"><a href="some%20more%20histograms%20of%20SNR%20for%20differant%20linewidths%20total_pixel_score_v3.png" target="_blank"><img src="some%20more%20histograms%20of%20SNR%20for%20differant%20linewidths%20total_pixel_score_v3.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;">in these figures, there are several histograms of the score-values seen in the result image of the string-detection-algorithm when applied to picture #01. in blue is the scores of the noisy background. in red is the score of the string region. the SNR in this system is the ratio of the average signal (red line) and the maximum noise (blue line)</td>
+</tr>
+</tbody>
+</table>
+<p>unsurprisingly the pixels that are closer to the string score higher on average. and also unsurprisingly, the snr is best when the line width is equal to the strings actual width which is around 4~5. this aligns with the results in the v3.1/3.2 paragraphs in <a href="line_detection_v3_specifics/line_detection_v3_worklog.html#v32">line_detection_v3_worklog</a>
+. this is shown in the following graph</p>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<thead><tr class="header"><th style="text-align: center;"><a href="SNR%20vs%20line_width%20graph.png" target="_blank"><img src="SNR%20vs%20line_width%20graph.png" alt="snr" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;">the snr as a function of line width. the maximusm is clearly visible at “line_width=5”</td>
+</tr>
+</tbody>
+</table>
+<p><a href="string%20width.png" target="_blank"><img src="string%20width.png" /></a></p>
+<h4 id="line-detection-v4">line detection v4</h4>
+<p>I realized that in line_detection_v3 I use 4 kernels, each of which is tailored to detect lines with different angles. I could use the relative values of these kernels to predict the angle of the line at some point. this is what I do in <a href="line_detection_v4_specifics/line_detection_v4_worklog.html">line_detector_v4</a>
+ with great success:</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="line_detection_v4_specifics/angle_detect_on_real_problem_skip15.png" target="_blank"><img src="line_detection_v4_specifics/angle_detect_on_real_problem_skip15.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v4_specifics/angle_detect_on_real_problem_zoomed1_skip4.png" target="_blank"><img src="line_detection_v4_specifics/angle_detect_on_real_problem_zoomed1_skip4.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;"><a href="line_detection_v4_specifics/angle_detect_on_real_problem_zoomed2_skip4.png" target="_blank"><img src="line_detection_v4_specifics/angle_detect_on_real_problem_zoomed2_skip4.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v4_specifics/angle_detect_on_real_problem_zoomed3_skip4.png" target="_blank"><img src="line_detection_v4_specifics/angle_detect_on_real_problem_zoomed3_skip4.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>although this is objectively really cool, and I surely could improve the string detection by using this angular data, I have decided that using this would make the string detection more complex, and I think the string detection would probably be good enough without the angular data.</p>
+<h4 id="total-pixel-score-v3.2">total pixel score v3.2:</h4>
+<p>uses line detection v3.7 instead of line detection v3.5. this has minor performance improvements</p>
+</body>
+</html>

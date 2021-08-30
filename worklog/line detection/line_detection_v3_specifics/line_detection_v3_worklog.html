@@ -1,0 +1,292 @@
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="E:\Liors_Stuff\Experimants\soap solution surface tention\worklog_new\Site_Map.html" >Site Map</a></td>
+</tr>
+</tbody>
+</table>
+<br><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>line_detection_v3_worklog</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="..\..\default_markdown_style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>line detector v3 works via fitting a line pattern around every pixel. in the first attempt I use two patterns, x oriented and y oriented, the results are:</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="line_detector_v3_1.png" target="_blank"><img src="line_detector_v3_1.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;"><a href="line_detector_v3_3.png" target="_blank"><img src="line_detector_v3_3.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: center;"><a href="line_detector_v3_5.png" target="_blank"><img src="line_detector_v3_5.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="v3.1">v3.1</h1>
+<p>because I sum the real and imaginary parts, a line’s end point gets double, which is bad, so in v3.1 I add take the maximum of the real and the imaginary, instead of the sum:</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="line_detector_v3.1_line_end.png" target="_blank"><img src="line_detector_v3.1_line_end.png" /></a></td>
+<td style="text-align: center;"><a href="line_detector_v3_line_end.png" target="_blank"><img src="line_detector_v3_line_end.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<table><tbody><tr class="odd"><td style="text-align: center;">table of results of line detector v3.1 when applied to a test pattern</td>
+</tr>
+</tbody>
+</table>
+<table><thead><tr class="header"><th style="text-align: left;"></th>
+<th style="text-align: center;">line width = 1</th>
+<th style="text-align: center;">line width = 4</th>
+<th style="text-align: center;">line width = 7</th>
+<th style="text-align: center;">line width = 10</th>
+<th style="text-align: center;">line width = 13</th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: left;">void width = 10</td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=10-linewidth=01.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=10-linewidth=01.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=10-linewidth=04.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=10-linewidth=04.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=10-linewidth=07.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=10-linewidth=07.png" /></a></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even"><td style="text-align: left;">void width = 20</td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=01.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=01.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=04.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=04.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=07.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=07.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=10.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=10.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=13.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=20-linewidth=13.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: left;">void width = 30</td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=01.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=01.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=04.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=04.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=07.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=07.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=10.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=10.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=13.png" target="_blank"><img src="line_detection_v3p1_on_pattern_2/line_detection_on_pattern2-voidwidth=30-linewidth=13.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>it can be seen that the performance is optimal when void width = (line width+1)*2. now, I want to compose some smooth function that will inherently hold this relation [void width = (line width+1)*2], and thus have only one major parameter.</p>
+<h1 id="v3.2">v3.2</h1>
+<p>i ended up making line-detector v3.2 which uses the second derivative of a Gaussian filter, this is faster due to me using an elementary function called scipy.ndimage.gaussian_filter. <strong>but this ended up lowering the performance, so Obviously I wont be using it.</strong>
+</p>
+<table><thead><tr class="header"><th style="text-align: left;"></th>
+<th style="text-align: center;">version 3.1</th>
+<th style="text-align: center;">version 3.2</th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: left;">line width = 1</td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=01.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=01.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=01.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=01.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: left;">line width = 2</td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=02.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=02.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=02.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=02.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: left;">line width = 3</td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=03.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=03.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=03.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=03.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: left;">line width = 4</td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=04.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=04.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=04.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=04.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: left;">line width = 5</td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=05.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=05.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=05.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=05.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: left;">line width = 6</td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=06.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=06.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=06.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=06.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: left;">line width = 7</td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=07.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p1_on_pattern2-linewidth=07.png" /></a></td>
+<td style="text-align: center;"><a href="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=07.png" target="_blank"><img src="line_detection_v3p2_on_pattern_2/line_detection_v3p2_on_pattern2-linewidth=07.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="v3.3">v3.3</h1>
+<p>v3.3 is based on v3.1 except I stop using complex numbers, and added diagonals.</p>
+<p><a href="line%20detection%20v3.3%20fit%20kernels.png" target="_blank"><img src="line%20detection%20v3.3%20fit%20kernels.png" /></a></p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="line%20detection%20v3.3%20split%20kernels.png" target="_blank"><img src="line%20detection%20v3.3%20split%20kernels.png" /></a></td>
+<td style="text-align: center;"><a href="line%20detection%20v3.3%20split%20kernels%20vmin=0.png" target="_blank"><img src="line%20detection%20v3.3%20split%20kernels%20vmin=0.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>the following problem arose, the diagonal kernels slightly negatively detect diagonal lines that are orthogonal to them. this is because the parpandicular diagonals sum up to not 1, as the following figure shows <a href="demonstration%20of%20v3.3%20normalisation%20problem.png" target="_blank"><img src="demonstration%20of%20v3.3%20normalisation%20problem.png" /></a> the solution is to normalise, in such a way that all perpandicular diagonals sum up to zero.</p>
+<h1 id="v3.4">v3.4</h1>
+<p><a href="line%20detection%20v3.4%20fit%20kernels.png" target="_blank"><img src="line%20detection%20v3.4%20fit%20kernels.png" /></a> <a href="line%20detection%20v3.4%20split%20kernels%20vmin=0.png" target="_blank"><img src="line%20detection%20v3.4%20split%20kernels%20vmin=0.png" /></a> this apparently fixed the problem, but has reduced line detection performance. this is not surprising as we found that sharp edges only improve performance. a possible solution is use the rotation functions automatic ability to black out the corners, and resize the image.</p>
+<h1 id="v3.5">v3.5</h1>
+<p><a href="line%20detection%20v3.5%20fit%20kernels.png" target="_blank"><img src="line%20detection%20v3.5%20fit%20kernels.png" /></a> notice the diagonal kernels are bigger. I will note that the diagonal kernels are normalized, so they add up to zero, this was slightly tricky to do:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>
+<span class="co"># normalise diag1_kernel</span>
+</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>
+rot_mask <span class="op">=</span>
+ rotate(x_ker<span class="op">*</span>
+<span class="dv">0</span>
+<span class="op">+</span>
+<span class="dv">1</span>
+,<span class="op">-</span>
+<span class="dv">45</span>
+,reshape<span class="op">=</span>
+<span class="va">True</span>
+,order<span class="op">=</span>
+<span class="dv">1</span>
+)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>
+diag1_ker <span class="op">-=</span>
+ np.<span class="bu">sum</span>
+(diag1_ker)<span class="op">/</span>
+np.<span class="bu">sum</span>
+(rot_mask)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>
+diag1_ker <span class="op">*=</span>
+ rot_mask</span>
+</code>
+</pre>
+</div>
+<p>the resulting line detection is: <a href="line%20detection%20v3.5%20split%20kernels%20vmin=0.png" target="_blank"><img src="line%20detection%20v3.5%20split%20kernels%20vmin=0.png" /></a> <a href="line%20detection%20v3.5.png" target="_blank"><img src="line%20detection%20v3.5.png" /></a> this is definitely a great improvement</p>
+<h1 id="v3.6">v3.6</h1>
+<p>small change to how the different colors sum up, used to sum the square of the detection score for each color, in v3.6 I remove the square.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>
+<span class="co">### v3.5 </span>
+<span class="al">###</span>
+</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>
+fit_value_magnitude <span class="op">=</span>
+ np.<span class="bu">sum</span>
+(fit_value<span class="op">**</span>
+<span class="dv">2</span>
+,<span class="op">-</span>
+<span class="dv">1</span>
+)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>
+<span class="cf">return</span>
+ fit_value_magnitude</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>
+<span class="co">### v3.6 </span>
+<span class="al">###</span>
+</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>
+fit_value_magnitude <span class="op">=</span>
+ np.<span class="bu">sum</span>
+(fit_value,<span class="op">-</span>
+<span class="dv">1</span>
+)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>
+<span class="cf">return</span>
+ fit_value_magnitude</span>
+</code>
+</pre>
+</div>
+<p><a href="line%20detection%20v3.6.png" target="_blank"><img src="line%20detection%20v3.6.png" /></a> <a href="line%20detection%20v3.6_zoom1.jpg" target="_blank"><img src="line%20detection%20v3.6_zoom1.jpg" /></a> <a href="line%20detection%20v3.6_zoom2.jpg" target="_blank"><img src="line%20detection%20v3.6_zoom2.jpg" /></a> after this change we get a more even result for some reason, or an other way to say this is that somewhat unsurprisingly squaring the line detector result for each color before adding them up makes the resulting scores-image uneven, less predictable, and frankly worse:</p>
+<p>comparison of images :</p>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="line%20detection%20v3.5%20with%20color_location_scores.png" target="_blank"><img src="line%20detection%20v3.5%20with%20color_location_scores.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><span class="math inline">ColorScore\_v1(M)∗LocationScore\_v2(M)∗LineDetectorScore\_v3.5(M)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="line%20detection%20v3.6%20with%20color_location_scores.png" target="_blank"><img src="line%20detection%20v3.6%20with%20color_location_scores.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;"><em><span class="math inline">ColorScore\_v1(M)∗LocationScore\_v2(M)∗LineDetectorScore\_v3.6(M)</span>
+</em>
+</td>
+</tr>
+</tbody>
+</table>
+<h1 id="v3.7">v3.7</h1>
+<p>made this after making v4.1, only difference is that I add the std and orginatory stuff that I put in v4.1, do difference in performance.</p>
+</body>
+</html>

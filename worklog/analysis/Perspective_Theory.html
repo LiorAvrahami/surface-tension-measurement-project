@@ -1,0 +1,249 @@
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="E:\Liors_Stuff\Experimants\soap solution surface tention\worklog_new\Site_Map.html" >Site Map</a></td>
+</tr>
+</tbody>
+</table>
+<br><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Perspective_Theory</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="..\default_markdown_style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="the-theory-of-perspective-in-photos-of-plane-geometry">the theory of perspective in photos of plane geometry</h1>
+<h2 id="summery">summery</h2>
+<p>the photos I took of the plastic frame and the soapy film, were deformed by perspective affects, which morph the shape of the two strings in each picture. in this page I explain how I undo these perspective affects, and map points in the image back to points in real, undistorted, space.</p>
+<p>let it also be noted that the soap fil, the plastic frame, and the string all reside within the same plane in space.</p>
+<p>for the sake of this explanation I work with three coordinate systems:</p>
+<ol type="1"><li>u,v - the real world coordinate system, that is confined to the plane of the soap film, plastic frame, and string.</li>
+<li>x,y,z - the real world space coordinates system. z is taken to be perpendicular to the camera lens, and x is horizontal.</li>
+<li>x’,y’ - the coordinates in the picture (same as the coordinates at the cameras film).</li>
+</ol>
+<p>in short, I calibration 6 arguments of the transformation from real space to image space, via optimization functions, and, fix the perspective affects, and get the real world coordinates of these points via applying the reverse transformation on the image coordinate points.</p>
+<h2 id="transforming-uv-to-xy">transforming u,v to x’,y’</h2>
+<h3 id="uv-to-xyz">u,v to x,y,z</h3>
+<p>transforming u,v to x,y,z, is preformed by taking the following linear algebra definition of a plane:</p>
+<p><span class="math display">
+\text{plane S} = \{\vec{a}*u + \vec{b}*v + \vec{c_0} \text{ | for all u,v in } \mathbb{R} \} \\
+\text{ where } \vec{a} , \vec{b}, \vec{c_0} \text{ are all some 3d vectors that define the plane.}
+</span>
+ and also allow us to choose a,b so that they are orthonormal and oriented so that <span class="math inline">\vec{a}</span>
+ has no y component, <span class="math inline">\vec{b}</span>
+ has no x component, and that <span class="math inline">\vec{c_0}</span>
+ is parallel to the z direction. also orthonormal also means that <span class="math inline">\|\vec{a}\|=\|\vec{b}\|=1</span>
+.<br />
+in our case, we eventually use this transform to fit image points to real world points, so altho we can’t make this assumption, we do eventually need to supply a rotation degree of freedom in the final matching of the transformed points to the target points. this means we can apply a rotation in u,v so that the assumption above, about <span class="math inline">\vec{a}</span>
+, <span class="math inline">\vec{b}</span>
+ is met. also, because we eventually fit real points to image points, we also need to supply a translation degree of freedom, the translation needs to be in u,v (before or after the rotation). we shall denote the rotation angle with <span class="math inline">\alpha</span>
+, if no rotation is necessary, you can choose <span class="math inline">\alpha = 0</span>
+. also the translation shall denoted with <span class="math inline">\vec{t}</span>
+. to avoid confusion, we shall denote u’,v’, the coordinates in the u,v plane after the rotation and translation.<br />
+now, applying the following logic we can get this transformation in affine matrix form:</p>
+<p><span class="math display">
+\text{let }\vec{x}\text{ be a point in S:}\\
+\vec{x} = \vec{a}*u&#39; + \vec{b}*v&#39; + \vec{c_0} \\
+\vec{x} = \underbrace{\begin{pmatrix}
+a_1 &amp; b_1 &amp; (c_0)_1 \\
+a_2 &amp; b_2 &amp; (c_0)_2 \\
+a_3 &amp; b_3 &amp; (c_0)_3 \\
+\end{pmatrix}}_{\coloneqq \text{ Q}}
+\begin{pmatrix}u&#39; \\v&#39; \\1 \\\end{pmatrix} \\
+\vec{x} = \underbrace{
+\begin{pmatrix}
+a_1 &amp; b_1 &amp; (c_0)_1 \\
+a_2 &amp; b_2 &amp; (c_0)_2 \\
+a_3 &amp; b_3 &amp; (c_0)_3 \\
+\end{pmatrix}
+\underbrace{\begin{pmatrix}
+1 &amp; 0 &amp; t_1 \\
+0 &amp; 1 &amp; t_2 \\
+0 &amp; 0 &amp; 1 \\
+\end{pmatrix}}_{\text{translation in u,v}}
+\underbrace{\begin{pmatrix}
+cos(\alpha) &amp; -sin(\alpha) &amp; 0 \\
+sin(\alpha) &amp; cos(\alpha)  &amp; 0 \\
+0           &amp; 0            &amp; 0 \\
+\end{pmatrix}}_{\text{rotation in u,v}}
+}_{\coloneqq \text{ P}}
+\begin{pmatrix}u \\v \\1 \\\end{pmatrix} \\
+\vec{x} = P\begin{pmatrix}u \\v \\1 \\\end{pmatrix}
+</span>
+</p>
+<p>now, we know a lot of cells are zero: <span class="math inline">a_2 = b_1 = (c_0)_1 = (c_0)_2 = 0</span>
+. and since we know <span class="math inline">\vec{a}</span>
+ and <span class="math inline">\vec{b}</span>
+ are normalized: <span class="math inline">\|\vec{a}\|=\|\vec{b}\|=1</span>
+, and we can thus choose to select <span class="math inline">a_1=cos(\theta)</span>
+, <span class="math inline">b_2=cos(\phi)</span>
+ and we get:</p>
+<p><span class="math display">
+Q =
+\begin{pmatrix}
+cos(\theta) &amp; 0         &amp; 0       \\
+0           &amp; cos(\phi) &amp; 0       \\
+sin(\theta) &amp; sin(\phi) &amp; z_0     \\
+\end{pmatrix}
+</span>
+</p>
+<p><span class="math inline">\theta</span>
+ and <span class="math inline">\phi</span>
+ are the angles the planes normal makes with the z axis.</p>
+<p>and, to sum up, we get: <span class="math display">
+\begin{pmatrix}x \\y \\z \\\end{pmatrix} = P\begin{pmatrix}u \\v \\1 \\\end{pmatrix} \\
+P = \begin{pmatrix}
+cos(\theta) &amp; 0         &amp; 0       \\
+0           &amp; cos(\phi) &amp; 0       \\
+sin(\theta) &amp; sin(\phi) &amp; z_0     \\
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+1 &amp; 0 &amp; t_1 \\
+0 &amp; 1 &amp; t_2 \\
+0 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+cos(\alpha) &amp; -sin(\alpha) &amp; 0 \\
+sin(\alpha) &amp; cos(\alpha)  &amp; 0 \\
+0           &amp; 0            &amp; 0 \\
+\end{pmatrix}
+</span>
+</p>
+<h3 id="xyz-to-xy">x,y,z to x’,y’</h3>
+<p>perspective affects can be explained, simply put, by dividing the space in front of the camera into many (a continuum of) parallel planes all perpendicular to the z direction. each of these planes on it’s own acquires no distortion from the perspective affects. the perspective affect is that planes that are further away are scaled down more. or in other words things that are on further planes appear smaller. note that I didn’t write that further things appear smaller, since you could have some thing be really far away in x,y, but still be relatively close in z, and for perspective affects, z is what counts. the reason for this is related to optics and is not relevant enough to be discussed here</p>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="perspective_affect_explination.png" target="_blank"><img src="perspective_affect_explination.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">illustration of the space in front of the camera being divided up into many parallel planes all perpendicular to the z direction</td>
+</tr>
+</tbody>
+</table>
+<p>so in mathematical language, since the angular size of observed objects goes like <span class="math inline">angular\ size \propto \frac{size of object}{distance z}</span>
+, so in order to model the transformation from x,y,z to x’,y’, we simply need to apply the following:</p>
+<p><span class="math display">
+\begin{pmatrix}x&#39;\\y&#39;\end{pmatrix} = \eta \begin{pmatrix}\frac{x}{z}\\\frac{y}{z}\end{pmatrix}
+</span>
+</p>
+<p>where eta is some constant the holds all sort of scaling factors.</p>
+<h3 id="to-sum-up-uv-to-xy">to sum up, u,v to x’,y’:</h3>
+<p><span class="math display">
+P = \begin{pmatrix}
+cos(\theta) &amp; 0         &amp; 0       \\
+0           &amp; cos(\phi) &amp; 0       \\
+sin(\theta) &amp; sin(\phi) &amp; z_0     \\
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+1 &amp; 0 &amp; t_1 \\
+0 &amp; 1 &amp; t_2 \\
+0 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+cos(\alpha) &amp; -sin(\alpha) &amp; 0 \\
+sin(\alpha) &amp; cos(\alpha)  &amp; 0 \\
+0           &amp; 0            &amp; 0 \\
+\end{pmatrix}\\
+\begin{pmatrix}x \\y \\z \\\end{pmatrix} = P\begin{pmatrix}u \\v \\1 \\\end{pmatrix} \\
+\begin{pmatrix}x&#39;\\y&#39;\end{pmatrix} = \eta \begin{pmatrix}\frac{x}{z}\\\frac{y}{z}\end{pmatrix}
+</span>
+</p>
+<p>as you can see, this transformation has 7 degrees of freedom including <span class="math inline">z_0</span>
+. but in my use, <span class="math inline">z_0</span>
+ was not counted, because it is almost degenerate with the scale scalar <span class="math inline">\eta</span>
+, in my case, I measured <span class="math inline">z_0</span>
+ to be around 40cm, and used this number in the transformations. so when I optimized a fit for the transform_arguments, I had 6 degrees of freedom, and 4 points in the fit, which totaled up to 8 equations with 6 variables.</p>
+<h2 id="transforming-xy-back-to-uv">transforming x’,y’ back to u,v</h2>
+<p>the mathematical theory described above, of a the process of image taking of points on a plane, with a camera, includes the transformation of the points on the plane, into angles. those angles intersect the photosensitive film inside the camera, which is in itself a plane. every point in the photosensitive film, registers the color value of the ray that intersects with it, and thus the final image is created. the thing is, that from a mathematical standpoint, the transformation here from plane to angles to film, and the reverse transformation from film to angles to plane, are of the same family. of course the parameters are different, but since in <a href="#transforming-uv-to-xy">transforming u,v to x’,y’</a>
+ we found all possible transformations in this family, we know that the reverse transformation must be of the same form. the question is what is the duality connection between the parameters of the u,v to x’,y’ transform to the parameters of the x’,y’ to the u,v transform.</p>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="perspective_affect_duality_explination.png" target="_blank"><img src="perspective_affect_duality_explination.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">ilistration of the duality between the transformation from a plane to the cameras film and the transformation from a cameras film to a plane</td>
+</tr>
+</tbody>
+</table>
+<p>with some algebra you can find the the link is: <span class="math display">
+\text{if Q in the transformation matrix is}\\
+Q = 
+\begin{pmatrix}
+cos(\theta) &amp; 0         &amp; 0       \\
+0           &amp; cos(\phi) &amp; 0       \\
+sin(\theta) &amp; sin(\phi) &amp; z_0     \\
+\end{pmatrix} \\
+\text{than }\tilde{Q}\text{ of the reverse transformation matrix is}\\
+\tilde{Q} = 
+\begin{pmatrix}
+\frac{z_0}{cos(\theta)} &amp; 0                     &amp; 0       \\
+0                       &amp; \frac{z_0}{cos(\phi)} &amp; 0       \\
+-tan(\theta)            &amp; -tan(\phi)            &amp; 1       \\
+\end{pmatrix} \\
+</span>
+</p>
+<p>and of course if <span class="math inline">R</span>
+ is the rotation of the original transformation, <span class="math inline">\tilde{R}</span>
+ the rotation of the reverse transformation, <span class="math inline">T</span>
+ is the translation of the original transformation, and <span class="math inline">\tilde{T}</span>
+ the translation of the reverse transformation: <span class="math display">
+R = \begin{pmatrix}
+cos(\alpha) &amp; -sin(\alpha) &amp; 0 \\
+sin(\alpha) &amp; cos(\alpha)  &amp; 0 \\
+0           &amp; 0            &amp; 0 \\
+\end{pmatrix}\\
+T = \begin{pmatrix}
+1 &amp; 0 &amp; t_2 \\
+0 &amp; 1 &amp; t_1 \\
+0 &amp; 0 &amp; 1   \\
+\end{pmatrix}\\
+\tilde{R} = \begin{pmatrix}
+cos(-\alpha) &amp; -sin(-\alpha) &amp; 0 \\
+sin(-\alpha) &amp; cos(-\alpha)  &amp; 0 \\
+0           &amp; 0            &amp; 0 \\
+\end{pmatrix}\\
+\tilde{T} = \begin{pmatrix}
+1 &amp; 0 &amp; -t_2 \\
+0 &amp; 1 &amp; -t_1 \\
+0 &amp; 0 &amp; 1   \\
+\end{pmatrix}\\
+</span>
+</p>
+<p>and from here it’s only slightly different from how it’s detailed in <a href="#transforming-uv-to-xy">transforming u,v to x’,y’</a>
+.</p>
+<p><span class="math display">
+\begin{pmatrix}x \\y \\z \\\end{pmatrix} = \tilde{Q}\begin{pmatrix}x&#39;\eta^-1 \\y&#39;\eta^-1 \\1 \\\end{pmatrix} \\
+\begin{pmatrix}u\\v\\1\end{pmatrix} = \tilde{R}\tilde{T}\begin{pmatrix}\frac{x}{z}\\\frac{y}{z}\\1\end{pmatrix}\\
+</span>
+</p>
+<p>the difference from <a href="#transforming-uv-to-xy">transforming u,v to x’,y’</a>
+ arises because of the scaling, translation and rotation, all of which are not part of the duality which was previously explained.</p>
+</body>
+</html>

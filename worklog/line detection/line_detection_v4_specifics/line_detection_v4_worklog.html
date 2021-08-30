@@ -1,0 +1,285 @@
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="E:\Liors_Stuff\Experimants\soap solution surface tention\worklog_new\Site_Map.html" >Site Map</a></td>
+</tr>
+</tbody>
+</table>
+<br><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>line_detection_v4_worklog</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="..\..\default_markdown_style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>line detector v4 attempts to estimate the lines angle via the different fit-results of the different fit-kernels. to achieve this I plot the kernel sensitivity to the angle mismatch. this is simmilar to what I did for line detector v3, except there I plotted the fit value vs position and line width where as here I plot the fit value vs line angle for every kernel.</p>
+<table><thead><tr class="header"><th style="text-align: left;"></th>
+<th style="text-align: center;">image of line at some angle</th>
+<th style="text-align: center;">fit val of x kernel</th>
+<th style="text-align: center;">fit val of diag1 kernel</th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: left;"></td>
+<td style="text-align: center;"><a href="table_1/01.png" target="_blank"><img src="table_1/01.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/02.png" target="_blank"><img src="table_1/02.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/03.png" target="_blank"><img src="table_1/03.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: left;"></td>
+<td style="text-align: center;"><a href="table_1/04.png" target="_blank"><img src="table_1/04.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/05.png" target="_blank"><img src="table_1/05.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/06.png" target="_blank"><img src="table_1/06.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: left;"></td>
+<td style="text-align: center;"><a href="table_1/07.png" target="_blank"><img src="table_1/07.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/08.png" target="_blank"><img src="table_1/08.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/09.png" target="_blank"><img src="table_1/09.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: left;"></td>
+<td style="text-align: center;"><a href="table_1/10.png" target="_blank"><img src="table_1/10.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/11.png" target="_blank"><img src="table_1/11.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/12.png" target="_blank"><img src="table_1/12.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: left;"></td>
+<td style="text-align: center;"><a href="table_1/13.png" target="_blank"><img src="table_1/13.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/14.png" target="_blank"><img src="table_1/14.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/15.png" target="_blank"><img src="table_1/15.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: left;"></td>
+<td style="text-align: center;"><a href="table_1/16.png" target="_blank"><img src="table_1/16.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/17.png" target="_blank"><img src="table_1/17.png" /></a></td>
+<td style="text-align: center;"><a href="table_1/18.png" target="_blank"><img src="table_1/18.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>* the point who’s value was taken for the graph is marked with a red circle</p>
+<p>for a set of 1000 angles in the range 0 to 180 I calculated the fit function of every one of the 4 fit kernels (x,diag1,y,diag2), extracted the value at the center, (the red point in the figures) and plotted the following figure of fit value vs angle for each kernel: <a href="normalised%20fit%20value%20of%20different%20kernels%20at%20different%20line%20angles.png" target="_blank"><img src="normalised%20fit%20value%20of%20different%20kernels%20at%20different%20line%20angles.png" /></a></p>
+<p>so, given the 4 values of the kernels fit values - the y axis (we will call this the V-space), we want to estimate the angle - the x axis. for example the four fit values (0.66,0.17,0,0.17) correspond to the angle 0. the word estimate is important here, because not every combination of 4 values in the V-space corresponds exactly to an angle. the simplest example is (0.5,0.5,0.5,0.5) which has no corresponding angle, at all, while the tuple (0.66,0.17,0.05,0.2) could be estimated to be (0.66,0.17,0,0.17) and thus could be estimated to correspond to the angle 0. the specifics of this estimation method is what is left to be found out.</p>
+<p>here is a comparison of the differant function forms: <a href="comparison%20of%20different%20kernel%20sensitivity%20function%20forms.png" target="_blank"><img src="comparison%20of%20different%20kernel%20sensitivity%20function%20forms.png" /></a> it is apparent that the diagonal kernels have a sensitivity function that is slightly different. this is not surprising, since the kernels are slightly different (the 45° rotation changes the kernel).</p>
+<p>it might be useful that <span class="math inline">y\_ker\_val = F(x\_ker\_val)</span>
+ with the exception of the places where x_ker_val is at a platou. this is true for diag1,diag2 too. and F is also it’s own inverse <span class="math inline">F(F(x)) = x \Rightarrow F^{-1}=F</span>
+. here are some figures</p>
+<table><tbody><tr class="odd"><td><a href="F__x_k_val_vs_y_k_val.png" target="_blank"><img src="F__x_k_val_vs_y_k_val.png" /></a></td>
+<td><a href="G__x_k_val_vs_d1_k_val.png" target="_blank"><img src="G__x_k_val_vs_d1_k_val.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="solution---v4.1">solution - v4.1</h4>
+<p>if we model the fit values as having some true value + some random uncertainty distribution than we can use the following formalism: let pvx(x) be some distribution corresponding to the probability of x_ker_fit_value being equal to some value x. now pvx yields some probability distribution for the line angle p_alpha, via some matrix - which we shall denote Mx. once I have the 4 angle distributions that correspond to the 4 fit kernels, I can combine them to get one distribution, and with this one distribution I can calculate the most likely angle and it’s 95% uncertainty interval. in order to calculate <span class="math inline">M_x</span>
+, I want to try to calculate <span class="math inline">M_x^{-1}</span>
+, this should be easier to calculate. I calculate <span class="math inline">M_x^{-1}</span>
+ by sampling the y values and interpolating them into a grid.</p>
+<h5 id="toy-example">toy example:</h5>
+<p>say I had the following toy model function: <a href="toy_model_function.png" target="_blank"><img src="toy_model_function.png" /></a></p>
+<p>than <span class="math inline">M_x^{-1}</span>
+ would be equal to:</p>
+<p><span class="math display">
+M_x^{-1} =
+\begin{pmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}
+</span>
+</p>
+<p><span class="math display">
+M_x =
+\begin{pmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \frac{1}{3}\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \frac{1}{3}\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \frac{1}{3}\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}
+</span>
+</p>
+<h5 id="real-problem">real problem</h5>
+<h6 id="parameterize-xy-angle-sensitivity-function">parameterize x,y angle-sensitivity-function</h6>
+<p>in order to work with the real problem, let us first find a parameter defined equivalent for this angle-sensitivity-function. in the following figure are 2 parametrisation of the y kernel’s angle-sensitivity-function: <a href="parametrizations.png" target="_blank"><img src="parametrizations.png" /></a> *we are trying to paramaterize “reflected_y_kernel_fit” wich is a less noisy version of the angle-sensitivity-function. it was created by setting the left side of angle-sensitivity-function to the reflecting of it’s right side.</p>
+<p>the mean of the gaussian fit is 90°, the standard deviation is 29.5°, and the normalization factor is 0.69. also the constent 0.0325 was tacken from the gaussian fit, and it was set to equal 0 when it is negative.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>
+np.maximum(np.exp(<span class="op">-</span>
+(angles<span class="op">-</span>
+<span class="dv">90</span>
+)<span class="op">**</span>
+<span class="dv">2</span>
+<span class="op">/</span>
+(<span class="dv">2</span>
+<span class="op">*</span>
+<span class="fl">29.5</span>
+<span class="op">**</span>
+<span class="dv">2</span>
+))<span class="op">*</span>
+<span class="fl">0.69</span>
+ <span class="op">-</span>
+ <span class="fl">0.0325</span>
+,<span class="dv">0</span>
+)</span>
+</code>
+</pre>
+</div>
+<p>the polyfit was taken around angel = 90°, and the polynomial coefficients for the 10 degree poly-fit are:</p>
+<pre><code>[0.665134361, 0, -0.000357457392, 0, 6.16006663e-08, 0, -1.99699176e-12, 0, -4.17924684e-16, 0, 3.01356888e-20]</code>
+</pre>
+<p>where 0.665134361 is the coeff for <span class="math inline">(angel - 90°)^0</span>
+<br />
+and 3.01356888e-20 is the coeff for <span class="math inline">(angel - 90°)^{10}</span>
+</p>
+<p>as you can see the poly-10 fit unsurprisingly segnificantly better. this is not a fair match since the poly-10 fit has 6 parameters while the gaussian fit has only three.</p>
+<h6 id="parameterize-d1d2-kernels-angle-sensitivity-function">parameterize d1,d2 kernel’s angle-sensitivity-function</h6>
+<p><a href="parametrizations%20of%20diag.png" target="_blank"><img src="parametrizations%20of%20diag.png" /></a> the gaussian parametrization for the diagonal’s kernel is vary good. no need for polyfit.</p>
+<p>the mean of the gaussian should be at 45°, the standard deviation is 28°, and the normalization factor is 0.681. also the constent 0.021 was tacken from the gaussian fit, and it was set to equal 0 when it is negative.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>
+np.maximum(np.exp(<span class="op">-</span>
+(z_ang)<span class="op">**</span>
+<span class="dv">2</span>
+<span class="op">/</span>
+(<span class="dv">2</span>
+<span class="op">*</span>
+<span class="dv">28</span>
+<span class="op">**</span>
+<span class="dv">2</span>
+))<span class="op">*</span>
+<span class="fl">0.681</span>
+ <span class="op">-</span>
+ <span class="fl">0.021</span>
+,<span class="dv">0</span>
+)</span>
+</code>
+</pre>
+</div>
+<h6 id="the-kernels-angle-sensitivitys-matrix-form">the kernel’s angle-sensitivity’s matrix form</h6>
+<p>instead of calculating <span class="math inline">M_x^{-1}</span>
+ and then inverting it, I ended up calculating <span class="math inline">M_x</span>
+ directly by the following equation:</p>
+<p><span class="math display">
+M_{x_{not normed}}(angle,fit\_value) = \exp(-\sigma \cdot |real\_fit\_value(angle) - fit\_value|)\\
+M_{x}(angle,fit\_value) = M_{x_{not normed}}(angle,fit\_value)/Sum\_On\_Column(fit\_value)\\\\
+\sigma = some tune-able constant that creates widths
+</span>
+</p>
+<p>the matrices that you get are:</p>
+<table><tbody><tr class="odd"><td><a href="tabel_2/x_kernel_angle_sensitivity_matrix.png" target="_blank"><img src="tabel_2/x_kernel_angle_sensitivity_matrix.png" /></a></td>
+<td><a href="tabel_2/d1_kernel_angle_sensitivity_matrix.png" target="_blank"><img src="tabel_2/d1_kernel_angle_sensitivity_matrix.png" /></a></td>
+<td><a href="tabel_2/y_kernel_angle_sensitivity_matrix.png" target="_blank"><img src="tabel_2/y_kernel_angle_sensitivity_matrix.png" /></a></td>
+<td><a href="tabel_2/d2_kernel_angle_sensitivity_matrix.png" target="_blank"><img src="tabel_2/d2_kernel_angle_sensitivity_matrix.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>matrices made with sigma = 100</p>
+<p>when this is applied to measured fit values that corrispond to angle 20° we get the following graph <a href="angle%20probability%20of%20differant%20kernels.png" target="_blank"><img src="angle%20probability%20of%20differant%20kernels.png" /></a></p>
+<p>and when these results are multiplied and normalized to be a probability function we get: <a href="total%20angle%20probability%20Prediction.png" target="_blank"><img src="total%20angle%20probability%20Prediction.png" /></a> <a href="total%20angle%20probability%20Prediction%20zoomed.png" target="_blank"><img src="total%20angle%20probability%20Prediction%20zoomed.png" /></a></p>
+<p>but there is a problem with this mean calculation method.</p>
+<p><a href="angle%20probability%20of%20differant%20kernels%20for%20horrisontal%20line.png" target="_blank"><img src="angle%20probability%20of%20differant%20kernels%20for%20horrisontal%20line.png" /></a></p>
+<p>for lines with angles that are close to 0° or 180°, the probability function gets split because of the ciclic nature of these angles. unike regular angles, because in this problem a 0° line is equivilant to a 180° line and a 20° line is equivilant to a 200° line, these angles are defined up t a modulu of 180 (half a rotation). and this is not taken into acount in calculating the mean angle. as can be seen in the following figure, the average of a probability distrebution centered equally around 0°, and 180° is 90° which <strong>couldn’t be more wrong!</strong>
+.</p>
+<p><a href="total%20angle%20probability%20Prediction%20for%20horisontal%20line.png" target="_blank"><img src="total%20angle%20probability%20Prediction%20for%20horisontal%20line.png" /></a></p>
+<p>the solution as posed in Wikipedia to solve this for angles that are defined modulus 360° is to place the distribution on a circle at the 2d plane, calculate the 2d point average,then calculate the angle of said average, and you’r done. this is implemented done by calculating the average of the complex exponents of the numbers, <span class="math inline">\sum{P(alpha)e^{i\alpha}}</span>
+ where alpha is in radians. and taking the arg of the complex result</p>
+<p>because in this problem the angles are defined modulus 180°, we need to multiply them by 2 before applying the solution above, and divide the result by 2.</p>
+<p>after applying this method (and days of searching for bugs)</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="angle_detect_on_real_problem_skip15.png" target="_blank"><img src="angle_detect_on_real_problem_skip15.png" /></a></td>
+<td style="text-align: center;"><a href="angle_detect_on_real_problem_zoomed1_skip4.png" target="_blank"><img src="angle_detect_on_real_problem_zoomed1_skip4.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;"><a href="angle_detect_on_real_problem_zoomed2_skip4.png" target="_blank"><img src="angle_detect_on_real_problem_zoomed2_skip4.png" /></a></td>
+<td style="text-align: center;"><a href="angle_detect_on_real_problem_zoomed3_skip4.png" target="_blank"><img src="angle_detect_on_real_problem_zoomed3_skip4.png" /></a></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

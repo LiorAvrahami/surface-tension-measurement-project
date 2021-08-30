@@ -1,0 +1,219 @@
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="E:\Liors_Stuff\Experimants\soap solution surface tention\worklog_new\Site_Map.html" >Site Map</a></td>
+</tr>
+</tbody>
+</table>
+<br><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>analysis_worklog</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="..\default_markdown_style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="analysis-work-log">analysis work-log</h1>
+<h2 id="soap-type">soap type</h2>
+<p><a href="echo_friendly_soap_image.png" target="_blank"><img src="echo_friendly_soap_image.png" /></a></p>
+<h2 id="units">units</h2>
+<p>in order to be able to convert from pixels to length units (cm) I manually marked the edge-points (with automation assistance) of the plastic frame for all the pictures. here is an example image:</p>
+<table><thead><tr class="header"><th style="text-align: center;"><a href="marked%20frame%20edge.png" target="_blank"><img src="marked%20frame%20edge.png" /></a></th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: center;">in red are the edge points that I marked manually</td>
+</tr>
+</tbody>
+</table>
+<p>I measured the real world length between these points and found it to be: <span class="math display">119mm\pm1</span>
+</p>
+<p>for <a href="#extract_curvature_v2">extract_curvature_v2</a>
+ I ended up using some other frame measures as well in order to extract the angling of the shot (for perspective analysis): <a href="marked_frame_edges_full.png" target="_blank"><img src="marked_frame_edges_full.png" /></a></p>
+<h2 id="analysis">analysis</h2>
+<p>the analysis consists mostly of extracting the radius of curvature of the string. this is of course done after using the line detection method that is described in <a href="../line%20detection/line_detection_worklog.html">line_detection_worklog</a>
+</p>
+<p>I tried several iterations of curvature extracting algorithms, which are called by a common script which iterates over all the images, applies the latest <a href="../line%20detection/line_detection_worklog.html">line detection method</a>
+ which is v3.2 (score_pixel_v3p2) and then tries to extract the radius of curvature from the line-detection-score image. now I will describe the different curvature extraction methods I had tried:</p>
+<h3 id="extract_curvature_v1">extract_curvature_v1</h3>
+<p>this method uses the global minimum search optimization algorithm called “scipy.optimize.minimize” to find the 4 parameters that define the ellipse that fits the curve best. only 4 paramitteres are used and not the usual 5 because it is assumed that the elipses major and minor axes are aligned with the xy axes. this assumption is of course an approximation.</p>
+<h4 id="score-function">score function</h4>
+<p>the score function is the function that is given a set of ellipse parameters and returns a score of how well these parameters fit the image. the score function I initially used, is a score function I made up, which is the dot product of the line_detection_result with a synthesized image of the ellipse that is made from the given parameters. the ellipse is made to be more “real” and more “forgiving” by applying a gaussian smearing filter to it. the following are figures of this ellipse, synthesized from the ellipse parameters.</p>
+<table><colgroup><col style="width: 50%" /><col style="width: 50%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="synthetic_ellipse_in_real_image.png" target="_blank"><img src="synthetic_ellipse_in_real_image.png" /></a></td>
+<td style="text-align: center;"><a href="synthetic_ellipse.png" target="_blank"><img src="synthetic_ellipse.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">close up on the sinthetic ellipse on top of the real line detection results</td>
+<td style="text-align: center;">the sinthetic ellipse, in the intire frame, blur sigma = 15px</td>
+</tr>
+</tbody>
+</table>
+<h4 id="extract_curvature_v1-fit-quality">extract_curvature_v1 : fit quality</h4>
+<p>in the following table are some of the fit results, on the original images. as you can see some appear very good and some appear very bad. this is true for all the pictures, the fit results are either quite good or exceptionally bad.</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="extract_curviture_v1_image_04.png" target="_blank"><img src="extract_curviture_v1_image_04.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v1_image_05.png" target="_blank"><img src="extract_curviture_v1_image_05.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v1_image_06.png" target="_blank"><img src="extract_curviture_v1_image_06.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;"><a href="extract_curviture_v1_image_10.png" target="_blank"><img src="extract_curviture_v1_image_10.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v1_image_76.png" target="_blank"><img src="extract_curviture_v1_image_76.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v1_image_63.png" target="_blank"><img src="extract_curviture_v1_image_63.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="extract_curvature_v1-radius-parameter-quality">extract_curvature_v1 : radius parameter quality</h4>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="extract_curvature_v1_graph1.png" target="_blank"><img src="extract_curvature_v1_graph1.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curvature_v1_graph2.png" target="_blank"><img src="extract_curvature_v1_graph2.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>it appears from the right figure that the surface tension of the echo-friendly soap is twice that of normal soap, bust still in the region between soap and water. from these results it can not be deduced that the surface tension changes with soap concentration.</p>
+<h3 id="extract_curvature_v2">extract_curvature_v2</h3>
+<p>making my own curve fitting function based on scipy minimize was not a good idea, mainly because finding a score function for an optional curve, layed on an image is not that trivial, and The method I chose is probably not great.</p>
+<p>so I decided to try a different approach altogether: I extract a bounch of points from the line_detection_score_image, and fit a circle function with scipy’s curve_fitting function, on to those points, with the weight of each point being equal to the line_detection_score_image’s value at that point. the only problem with this is that the string’s curve is not gaurentead to be a function of x or y. so What I ended up doing is transform the points to polar coorrdinates around some crudely estimated center point. in these polar coordinates the curve is almost defenetly a function of theta, and so now I can fit these points to the equation of an of centered circle in polar coordinates, wich is: (I explain why i used a circle and not an ellipse , later)</p>
+<p><span class="math display">
+ r\ =a\cos\theta+b\sin\theta\pm\sqrt{\left(a\cos\theta+b\sin\theta\right)^{2}+R^{2}-a^{2}-b^{2}}
+</span>
+</p>
+<p>I used a circle instead of an ellipse because I wanted to have as little coefissients as possible inb the fit optimization process, and because the above equation would become segnificantly more complex for an ellipse.</p>
+<p>initially I tried ignoring the elipticity of the string, to see what would happen, here are the results for the first picture (image_01):</p>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="scatter_plot_of_points_extracted_from_image_01.png" target="_blank"><img src="scatter_plot_of_points_extracted_from_image_01.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">scatter plot of the points extracted from the line_detection on image_01. in red are the points that are extracted from the left line, and in blue are the points that are extracted from the right line.</td>
+</tr>
+</tbody>
+</table>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="results_v2_no_perspective.png" target="_blank"><img src="results_v2_no_perspective.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;"><a href="results_v2_no_perspective2.png" target="_blank"><img src="results_v2_no_perspective2.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: center;">example results of optimal circle detection. it can be noticed that the results are of quite low quality. it seems that not even the most optimal circle can manage to fit these curves well</td>
+</tr>
+</tbody>
+</table>
+<p>so now comes the question, are the strings in these pictures really ellipses? and if so, by how much?</p>
+<h4 id="perspective">perspective</h4>
+<p>so I went ahead an mesured the x,y, scaling ratio, via measuring the major-minor-axes-ratio of the string, and the width to height ration of the frames grid, as can be seen in the following figures, the rasio is around 108%~110%</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="streach_of_frame_grid_image_01.png" target="_blank"><img src="streach_of_frame_grid_image_01.png" /></a></td>
+<td style="text-align: center;"><a href="streach_of_string_image_01.png" target="_blank"><img src="streach_of_string_image_01.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>wich means two things. the ellipticity is defenetly important, and it can be deduced from the frame, and thus doesn’t need to be extracted from the already difficult enough curve fit. this means that in the analysis of this problem I have to take perspective effects into account. so in order to accomadate for the perspective affects, I need to characterize some perspective affects parameters. in this problem the picture I’m interested in (the frame and the string) are all in one plane. the theoretical part of how a plane is transformed as a result of perspective is detailed in <a href="Perspective_Theory.html">Perspective_Theory</a>
+. the result is some function that depends on some 4 parameters. in order to find these perspective geometry parameters was as follows:</p>
+<ol type="1"><li>I measured the distances of the 4 constant points on the real actual frame from one another, shown in <a href="#units">Units</a>
+</li>
+<li>I used scipy.optimize.minimize in order to find the best 4 sized shape that fits these distances. there is of course a redundancy in data used to characterize the location of these points with higher accuracy. the points that were reached are shown in the figure below</li>
+<li>I manually marked to these 4 points in all the 80 pictures (using some automatic script to help make the process easy)</li>
+<li>for each picture I used scipy.optimize.minimize in order to find the perspective geometry parameters that best transfer the 4 measured points to the 4 points in the picture.</li>
+</ol>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="location_of_frame_points.png" target="_blank"><img src="location_of_frame_points.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">the locations of the real points on the frame reletive to some center point, the estimated uncertainty of the fit is around 0.1 mm</td>
+</tr>
+</tbody>
+</table>
+<p>after I found the perspective geometry parameters for some picture, I can a reversed transformation to the string points on that picture, this transformation fixes the perspective issue and maps the string points to a perfect circle.</p>
+<table><colgroup><col style="width: 50%" /><col style="width: 50%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="string_points_in_image_coords.png" target="_blank"><img src="string_points_in_image_coords.png" /></a></td>
+<td style="text-align: center;"><a href="string_points_in_real_coords.png" target="_blank"><img src="string_points_in_real_coords.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">string points in image coordinates (before reverse perspective transform)</td>
+<td style="text-align: center;">string points in real coordinates (after reverse perspective transform)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="extract_curvature_v2-fit-quality">extract_curvature_v2 : fit quality</h4>
+<p>in the following table are some of the fit results, on top the original images. note that I do the circle fit after the perspective fix to the string points, and then, for the sake of these pictures only, I transform the circles back to the image corrdinates. this distorts the circles and makes them not circular in the following pictures, looking at the distorted circles allows you to appreciate how important the perspective transforms were in order to achieve got circle fits from these pictures.</p>
+<table><colgroup><col style="width: 13%" /><col style="width: 17%" /><col style="width: 17%" /><col style="width: 17%" /><col style="width: 17%" /><col style="width: 17%" /></colgroup>
+<thead><tr class="header"><th style="text-align: left;">pic number</th>
+<th style="text-align: center;">fit circles drawn on image</th>
+<th style="text-align: center;">left fit in polar coordinates: x is radians, orange is blue shifted by 2pi, y is distance</th>
+<th style="text-align: center;">left fit results: in red is the fit results, in blue is the initial guess</th>
+<th style="text-align: center;">right fit in polar coordinates: x is radians, orange is blue shifted by 2pi, y is distance</th>
+<th style="text-align: center;">right fit results: in red is the fit results, in blue is the initial guess</th>
+</tr>
+</thead>
+<tbody><tr class="odd"><td style="text-align: left;">04</td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665.png" target="_blank"><img src="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665leftfit_in_polar.png" target="_blank"><img src="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665leftfit_in_polar.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665leftfit_on_image.png" target="_blank"><img src="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665leftfit_on_image.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665rightfit_in_polar.png" target="_blank"><img src="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665rightfit_in_polar.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665rightfit_on_image.png" target="_blank"><img src="extract_curviture_v2_circle_fits\04_mw552.9_ms2.48_mp0.665rightfit_on_image.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: left;">06</td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80.png" target="_blank"><img src="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80leftfit_in_polar.png" target="_blank"><img src="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80leftfit_in_polar.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80leftfit_on_image.png" target="_blank"><img src="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80leftfit_on_image.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80rightfit_in_polar.png" target="_blank"><img src="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80rightfit_in_polar.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80rightfit_on_image.png" target="_blank"><img src="extract_curviture_v2_circle_fits\06_mw552.9_ms2.48_mp0.80rightfit_on_image.png" /></a></td>
+</tr>
+<tr class="odd"><td style="text-align: left;">10</td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81.png" target="_blank"><img src="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81leftfit_in_polar.png" target="_blank"><img src="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81leftfit_in_polar.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81leftfit_on_image.png" target="_blank"><img src="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81leftfit_on_image.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81rightfit_in_polar.png" target="_blank"><img src="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81rightfit_in_polar.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81rightfit_on_image.png" target="_blank"><img src="extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81rightfit_on_image.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: left;">75</td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65.png" target="_blank"><img src="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65leftfit_in_polar.png" target="_blank"><img src="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65leftfit_in_polar.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65leftfit_on_image.png" target="_blank"><img src="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65leftfit_on_image.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65rightfit_in_polar.png" target="_blank"><img src="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65rightfit_in_polar.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65rightfit_on_image.png" target="_blank"><img src="extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65rightfit_on_image.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="extract_curvature_v2-radius-parameter-quality">extract_curvature_v2 : radius parameter quality</h4>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="extract_curvature_v2_graph1.png" target="_blank"><img src="extract_curvature_v2_graph1.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curvature_v2_graph3.png" target="_blank"><img src="extract_curvature_v2_graph3.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;"><a href="extract_curvature_v2_graph2.png" target="_blank"><img src="extract_curvature_v2_graph2.png" /></a></td>
+<td style="text-align: center;"><a href="extract_curvature_v2_graph4.png" target="_blank"><img src="extract_curvature_v2_graph4.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendix">appendix</h2>
+<p>I found that the left and right radii were in general not equal for all pictures. in fact, there seems to be a bias, towords the left radii being bigger than the right radii, this indicates that the left part of the string is at tighter tension than the right part. when thinking over a reason for this, I reached the conclusion that the weights’ center of mass is not centered, but slightly offset to the left. in order for the system to reach equalibrium, the moments as well as the forces have to sum up to zero. this leads to the load on to the left part of the string being greater than the load on the right part. seeing as this possabuility was taken into account, this has no damaging affect to the results/conclusions.</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="histogram_of_proportions_between_left_and_right_radii.png" target="_blank"><img src="histogram_of_proportions_between_left_and_right_radii.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">as is shown here, the left radius is generally 110%-130% larger</td>
+</tr>
+</tbody>
+</table>
+<table><colgroup><col style="width: 100%" /></colgroup>
+<tbody><tr class="odd"><td style="text-align: center;"><a href="histogram_of_proportions_between_left_and_right_radii_for_the_different_weights.png" target="_blank"><img src="histogram_of_proportions_between_left_and_right_radii_for_the_different_weights.png" /></a></td>
+</tr>
+<tr class="even"><td style="text-align: center;">as you can see, the different weights appear to maybe have different biases, wich would corrispond to differant offsets to the center of mass, but this doesn’t appear to be somthing that cen be conclusivly decided.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
