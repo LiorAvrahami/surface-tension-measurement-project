@@ -131,8 +131,9 @@ this line detection method hase one paramitter called line_width. it uses foure 
 [reed more](line_detection_v3_specifics/line_detection_v3_worklog.html)
 
 #### total pixel score v3:
-
-![](total%20pixel%20score%20v3%20vs%20line%20width.png)
+||
+|:--:|
+|![](total%20pixel%20score%20v3%20vs%20line%20width.png)|
 
 |![](total%20pixel%20score%20v3%20vs%20line%20width_2.png)|
 |:---:|
@@ -157,7 +158,9 @@ unsurprisingly the pixels that are closer to the string score higher on average.
 |:---:|
 |the snr as a function of line width. the maximusm is clearly visible at "line_width=5"|
 
-![](string%20width.png)
+||
+|:--:|
+|![](string%20width.png)|
 
 #### line detection v4
 

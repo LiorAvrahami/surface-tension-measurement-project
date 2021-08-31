@@ -144,9 +144,18 @@
 </tbody>
 </table>
 <p>* the point who’s value was taken for the graph is marked with a red circle</p>
-<p>for a set of 1000 angles in the range 0 to 180 I calculated the fit function of every one of the 4 fit kernels (x,diag1,y,diag2), extracted the value at the center, (the red point in the figures) and plotted the following figure of fit value vs angle for each kernel: <a href="normalised%20fit%20value%20of%20different%20kernels%20at%20different%20line%20angles.png" target="_blank"><img src="normalised%20fit%20value%20of%20different%20kernels%20at%20different%20line%20angles.png" /></a></p>
+<p>for a set of 1000 angles in the range 0 to 180 I calculated the fit function of every one of the 4 fit kernels (x,diag1,y,diag2), extracted the value at the center, (the red point in the figures) and plotted the following figure of fit value vs angle for each kernel:</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="normalised%20fit%20value%20of%20different%20kernels%20at%20different%20line%20angles.png" target="_blank"><img src="normalised%20fit%20value%20of%20different%20kernels%20at%20different%20line%20angles.png" /></a></td>
+</tr>
+</tbody>
+</table>
 <p>so, given the 4 values of the kernels fit values - the y axis (we will call this the V-space), we want to estimate the angle - the x axis. for example the four fit values (0.66,0.17,0,0.17) correspond to the angle 0. the word estimate is important here, because not every combination of 4 values in the V-space corresponds exactly to an angle. the simplest example is (0.5,0.5,0.5,0.5) which has no corresponding angle, at all, while the tuple (0.66,0.17,0.05,0.2) could be estimated to be (0.66,0.17,0,0.17) and thus could be estimated to correspond to the angle 0. the specifics of this estimation method is what is left to be found out.</p>
-<p>here is a comparison of the differant function forms: <a href="comparison%20of%20different%20kernel%20sensitivity%20function%20forms.png" target="_blank"><img src="comparison%20of%20different%20kernel%20sensitivity%20function%20forms.png" /></a> it is apparent that the diagonal kernels have a sensitivity function that is slightly different. this is not surprising, since the kernels are slightly different (the 45° rotation changes the kernel).</p>
+<p>here is a comparison of the differant function forms:</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="comparison%20of%20different%20kernel%20sensitivity%20function%20forms.png" target="_blank"><img src="comparison%20of%20different%20kernel%20sensitivity%20function%20forms.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>it is apparent that the diagonal kernels have a sensitivity function that is slightly different. this is not surprising, since the kernels are slightly different (the 45° rotation changes the kernel).</p>
 <p>it might be useful that <span class="math inline">y\_ker\_val = F(x\_ker\_val)</span>
  with the exception of the places where x_ker_val is at a platou. this is true for diag1,diag2 too. and F is also it’s own inverse <span class="math inline">F(F(x)) = x \Rightarrow F^{-1}=F</span>
 . here are some figures</p>
@@ -161,7 +170,11 @@
 , this should be easier to calculate. I calculate <span class="math inline">M_x^{-1}</span>
  by sampling the y values and interpolating them into a grid.</p>
 <h5 id="toy-example">toy example:</h5>
-<p>say I had the following toy model function: <a href="toy_model_function.png" target="_blank"><img src="toy_model_function.png" /></a></p>
+<p>say I had the following toy model function:</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="toy_model_function.png" target="_blank"><img src="toy_model_function.png" /></a></td>
+</tr>
+</tbody>
+</table>
 <p>than <span class="math inline">M_x^{-1}</span>
  would be equal to:</p>
 <p><span class="math display">
@@ -192,7 +205,12 @@ M_x =
 </p>
 <h5 id="real-problem">real problem</h5>
 <h6 id="parameterize-xy-angle-sensitivity-function">parameterize x,y angle-sensitivity-function</h6>
-<p>in order to work with the real problem, let us first find a parameter defined equivalent for this angle-sensitivity-function. in the following figure are 2 parametrisation of the y kernel’s angle-sensitivity-function: <a href="parametrizations.png" target="_blank"><img src="parametrizations.png" /></a> *we are trying to paramaterize “reflected_y_kernel_fit” wich is a less noisy version of the angle-sensitivity-function. it was created by setting the left side of angle-sensitivity-function to the reflecting of it’s right side.</p>
+<p>in order to work with the real problem, let us first find a parameter defined equivalent for this angle-sensitivity-function. in the following figure are 2 parametrisation of the y kernel’s angle-sensitivity-function:</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="parametrizations.png" target="_blank"><img src="parametrizations.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>*we are trying to paramaterize “reflected_y_kernel_fit” wich is a less noisy version of the angle-sensitivity-function. it was created by setting the left side of angle-sensitivity-function to the reflecting of it’s right side.</p>
 <p>the mean of the gaussian fit is 90°, the standard deviation is 29.5°, and the normalization factor is 0.69. also the constent 0.0325 was tacken from the gaussian fit, and it was set to equal 0 when it is negative.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>
 np.maximum(np.exp(<span class="op">-</span>
@@ -224,7 +242,11 @@ and 3.01356888e-20 is the coeff for <span class="math inline">(angel - 90°)^{10
 </p>
 <p>as you can see the poly-10 fit unsurprisingly segnificantly better. this is not a fair match since the poly-10 fit has 6 parameters while the gaussian fit has only three.</p>
 <h6 id="parameterize-d1d2-kernels-angle-sensitivity-function">parameterize d1,d2 kernel’s angle-sensitivity-function</h6>
-<p><a href="parametrizations%20of%20diag.png" target="_blank"><img src="parametrizations%20of%20diag.png" /></a> the gaussian parametrization for the diagonal’s kernel is vary good. no need for polyfit.</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="parametrizations%20of%20diag.png" target="_blank"><img src="parametrizations%20of%20diag.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>the gaussian parametrization for the diagonal’s kernel is vary good. no need for polyfit.</p>
 <p>the mean of the gaussian should be at 45°, the standard deviation is 28°, and the normalization factor is 0.681. also the constent 0.021 was tacken from the gaussian fit, and it was set to equal 0 when it is negative.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>
 np.maximum(np.exp(<span class="op">-</span>
@@ -264,13 +286,31 @@ M_{x}(angle,fit\_value) = M_{x_{not normed}}(angle,fit\_value)/Sum\_On\_Column(f
 </tbody>
 </table>
 <p>matrices made with sigma = 100</p>
-<p>when this is applied to measured fit values that corrispond to angle 20° we get the following graph <a href="angle%20probability%20of%20differant%20kernels.png" target="_blank"><img src="angle%20probability%20of%20differant%20kernels.png" /></a></p>
-<p>and when these results are multiplied and normalized to be a probability function we get: <a href="total%20angle%20probability%20Prediction.png" target="_blank"><img src="total%20angle%20probability%20Prediction.png" /></a> <a href="total%20angle%20probability%20Prediction%20zoomed.png" target="_blank"><img src="total%20angle%20probability%20Prediction%20zoomed.png" /></a></p>
+<p>when this is applied to measured fit values that corrispond to angle 20° we get the following graph</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="angle%20probability%20of%20differant%20kernels.png" target="_blank"><img src="angle%20probability%20of%20differant%20kernels.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>and when these results are multiplied and normalized to be a probability function we get:</p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="total%20angle%20probability%20Prediction.png" target="_blank"><img src="total%20angle%20probability%20Prediction.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="total%20angle%20probability%20Prediction%20zoomed.png" target="_blank"><img src="total%20angle%20probability%20Prediction%20zoomed.png" /></a></td>
+</tr>
+</tbody>
+</table>
 <p>but there is a problem with this mean calculation method.</p>
-<p><a href="angle%20probability%20of%20differant%20kernels%20for%20horrisontal%20line.png" target="_blank"><img src="angle%20probability%20of%20differant%20kernels%20for%20horrisontal%20line.png" /></a></p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="angle%20probability%20of%20differant%20kernels%20for%20horrisontal%20line.png" target="_blank"><img src="angle%20probability%20of%20differant%20kernels%20for%20horrisontal%20line.png" /></a></td>
+</tr>
+</tbody>
+</table>
 <p>for lines with angles that are close to 0° or 180°, the probability function gets split because of the ciclic nature of these angles. unike regular angles, because in this problem a 0° line is equivilant to a 180° line and a 20° line is equivilant to a 200° line, these angles are defined up t a modulu of 180 (half a rotation). and this is not taken into acount in calculating the mean angle. as can be seen in the following figure, the average of a probability distrebution centered equally around 0°, and 180° is 90° which <strong>couldn’t be more wrong!</strong>
 .</p>
-<p><a href="total%20angle%20probability%20Prediction%20for%20horisontal%20line.png" target="_blank"><img src="total%20angle%20probability%20Prediction%20for%20horisontal%20line.png" /></a></p>
+<table><tbody><tr class="odd"><td style="text-align: center;"><a href="total%20angle%20probability%20Prediction%20for%20horisontal%20line.png" target="_blank"><img src="total%20angle%20probability%20Prediction%20for%20horisontal%20line.png" /></a></td>
+</tr>
+</tbody>
+</table>
 <p>the solution as posed in Wikipedia to solve this for angles that are defined modulus 360° is to place the distribution on a circle at the 2d plane, calculate the 2d point average,then calculate the angle of said average, and you’r done. this is implemented done by calculating the average of the complex exponents of the numbers, <span class="math inline">\sum{P(alpha)e^{i\alpha}}</span>
  where alpha is in radians. and taking the arg of the complex result</p>
 <p>because in this problem the angles are defined modulus 180°, we need to multiply them by 2 before applying the solution above, and divide the result by 2.</p>

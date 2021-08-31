@@ -48,7 +48,9 @@ this is faster due to me using an elementary function called scipy.ndimage.gauss
 
 v3.3 is based on v3.1 except I stop using complex numbers, and added diagonals.
 
-![](line%20detection%20v3.3%20fit%20kernels.png)
+||
+|:--:|
+|![](line%20detection%20v3.3%20fit%20kernels.png)|
 
 |||
 |:-:|:-:|
@@ -56,13 +58,23 @@ v3.3 is based on v3.1 except I stop using complex numbers, and added diagonals.
 
 the following problem arose, the diagonal kernels slightly negatively detect diagonal lines that are orthogonal to them.
 this is because the parpandicular diagonals sum up to not 1, as the following figure shows
-![](demonstration%20of%20v3.3%20normalisation%20problem.png)
+
+||
+|:--:|
+|![](demonstration%20of%20v3.3%20normalisation%20problem.png)|
+
 the solution is to normalise, in such a way that all perpandicular diagonals sum up to zero.
 
 # v3.4
 
-![](line%20detection%20v3.4%20fit%20kernels.png)
-![](line%20detection%20v3.4%20split%20kernels%20vmin=0.png)
+||
+|:--:|
+|![](line%20detection%20v3.4%20fit%20kernels.png)|
+
+||
+|:--:|
+|![](line%20detection%20v3.4%20split%20kernels%20vmin=0.png)|
+
 this apparently fixed the problem, but has reduced line detection performance.
 this is not surprising as we found that sharp edges only improve performance.
 a possible solution is use the rotation functions automatic ability to black
@@ -70,7 +82,9 @@ out the corners, and resize the image.
 
 # v3.5
 
-![](line%20detection%20v3.5%20fit%20kernels.png)
+||
+|:--:|
+|![](line%20detection%20v3.5%20fit%20kernels.png)|
 notice the diagonal kernels are bigger.
 I will note that the diagonal kernels are normalized, so they add up to zero,
 this was slightly tricky to do:
@@ -83,8 +97,15 @@ diag1_ker *= rot_mask
 ```
 
 the resulting line detection is:
-![](line%20detection%20v3.5%20split%20kernels%20vmin=0.png)
-![](line%20detection%20v3.5.png)
+
+||
+|:--:|
+|![](line%20detection%20v3.5%20split%20kernels%20vmin=0.png)|
+
+||
+|:--:|
+|![](line%20detection%20v3.5.png)|
+
 this is definitely a great improvement
 
 # v3.6
@@ -101,9 +122,18 @@ fit_value_magnitude = np.sum(fit_value,-1)
 return fit_value_magnitude
 ```
 
-![](line%20detection%20v3.6.png)
-![](line%20detection%20v3.6_zoom1.jpg)
-![](line%20detection%20v3.6_zoom2.jpg)
+||
+|:--:|
+|![](line%20detection%20v3.6.png)|
+
+||
+|:--:|
+|![](line%20detection%20v3.6_zoom1.jpg)|
+
+||
+|:--:|
+|![](line%20detection%20v3.6_zoom2.jpg)|
+
 after this change we get a more even result for some reason,
 or an other way to say this is that somewhat unsurprisingly squaring the line
 detector result for each color before adding them up makes the resulting scores-image
