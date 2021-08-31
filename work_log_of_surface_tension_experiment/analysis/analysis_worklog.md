@@ -2,7 +2,10 @@
 # analysis work-log
 
 ## soap type
-![](echo_friendly_soap_image.png)
+
+|![](echo_friendly_soap_image.png)|
+|:---:|
+|the soap type used in this experiment, it's some weird echo friendly soap|
 
 ## units
 
@@ -15,7 +18,10 @@ in order to be able to convert from pixels to length units (cm) I manually marke
 I measured the real world length between these points and found it to be: $$119mm\pm1$$
 
 for [extract_curvature_v2](#extract_curvature_v2) I ended up using some other frame measures as well in order to extract the angling of the shot (for perspective analysis):
-![](marked_frame_edges_full.png)
+
+|![](marked_frame_edges_full.png)|
+|:--:|
+|I measured these distances on the real frame with a ruler|
 
 ## analysis
 
