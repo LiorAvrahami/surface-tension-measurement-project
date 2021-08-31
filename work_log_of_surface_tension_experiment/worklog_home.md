@@ -10,7 +10,7 @@ In this work I measure the surface tension of different Concentration solutions 
 |:---:|
 |![](sketch_of_system.png)|
 
-for further detail of the Theory see [The Theory Page](analysis\theory.html), there it is shown and explained that the surface tension is equal to $\gamma = \frac{mg}{D}\\$ where D is the distance between the centers of the circles. I happen to have a vary accurate weight gauge, and so the hard part of this experiment is acquiring with high accuracy the distance between the centers of the circles. to do this I took 80 pictures of the string with different weights and different Concentration solutions and applied string detecting, perspective reversing, and curve fitting algorithms to acquire the true parameters of the circles.
+for further detail of the Theory see [The Theory Page](analysis\theory.html), there it is shown and explained that the surface tension is equal to $\gamma = \frac{mg}{D}\\$ where D is the distance between the centers of the circles. I happen to have a very accurate weight gauge, and so the hard part of this experiment is acquiring with high accuracy the distance between the centers of the circles. to do this I took 80 pictures of the string with different weights and different Concentration solutions and applied string detecting, perspective reversing, and curve fitting algorithms to acquire the true parameters of the circles.
 
 |||
 |:--:|:--:|
@@ -29,8 +29,8 @@ for further detail of the Theory see [The Theory Page](analysis\theory.html), th
 in order to detect the string out of the picture, I applied several filters that help the string **"pop out"**, or in other words, I apply some string detecting filters to the images:
 
 1. location based: the top half of each image was given score 0
-2. color based: I used a distance filter centered around the color of the string wich is black with a slight red shift. the score is a 3d to 1d function that is a 3d gausian centered around the string color.
-3. line detection based: I used convolution with several kernels to help detect the string. I also managed to extract the strings angle at every pixle from the different of these 4 kernels. the kernels depend on a width parametter called "line_width", wich represents the width of the string in pixles.
+2. color based: I used a distance filter centered around the color of the string which is black with a slight red shift. the score is a 3d to 1d function that is a 3d gaussian centered around the string color.
+3. line detection based: I used convolution with several kernels to help detect the string. I also managed to extract the strings angle at every pixel from the different of these 4 kernels. the kernels depend on a width parameter called "line_width", which represents the width of the string in pixels.
 
 ||
 |:---:|
@@ -47,7 +47,7 @@ in order to detect the string out of the picture, I applied several filters that
 ||
 |:---:|
 |![](line%20detection/some%20more%20histograms%20of%20SNR%20for%20differant%20linewidths%20total_pixel_score_v3.png)|
-|in these figures, there are several histograms of the score-values seen in the result image of the string-detection-algorithm when applied to picture #01. in blue is the scores of the noisy background. in red is the score of the string region. the SNR in this system is the ratio of the average signal (red line) and the maximum noise (blue line)|
+|in these figures, there are several histograms of the score-values seen in the result image of the string-detection-algorithm when applied to picture #01. in blue is the score of the noisy background. in red is the score of the string region. the SNR in this system is the ratio of the average signal (red line) and the maximum noise (blue line)|
 
 ||
 |:---:|
@@ -58,7 +58,7 @@ a more detailed explanation, along with the different approaches I tried before 
 
 #### local angle detection - line_detector_v4
 
-I would also like to mention an other feature I implemented and did not end up using called line_detector_v4, which is a form of local angle detection. for any point on the string, I use the relative values of each of the 4 kernels, to determine the direction of the string in the point. allowing me to make these following arrow chart figures:
+I would also like to mention another feature I implemented and did not end up using called line_detector_v4, which is a form of local angle detection. for any point on the string, I use the relative values of each of the 4 kernels, to determine the direction of the string in the point. enabling me to present the following arrow chart figures:
 
 |||
 |:-:|:-:|
@@ -67,19 +67,19 @@ I would also like to mention an other feature I implemented and did not end up u
 
 for more info about this local angle detection method go to [line_detector_v4](line%20detection\line_detection_v4_specifics/line_detection_v4_worklog.html)
 
-## undoing perspective affects
+## undoing perspective effects
 
-I found perspective affects to be significant in these pictures, these affects are caused by non-negligible deviations in the cameras orientation from being perpendicular to the plane of the film. for example, in picture #01, this caused a 110% - 108% stretching affect of the x axis relative to the y axis, as can be sean in the following figures:
+I found perspective effects to be significant in these pictures, these effects are caused by non-negligible deviations in the cameras orientation from being perpendicular to the plane of the film. for example, in picture #01, this caused a 110% - 108% stretching effect of the x axis relative to the y axis, as can be seen in the following figures:
 
 |||
 |:--:|:--:|
 |![](analysis\streach_of_frame_grid_image_01.png)|![](analysis\streach_of_string_image_01.png)|
 
-so the perspective affects, really screw up all the circles and the distances in the picture, so in this work I undid the perspective distortion affects, by calibrating the perspective transformation coefficients and applying the reverse transformation to the points in the image.
+so, the perspective effects, really screw up all the circles and the distances in the picture, thus in this work I undid the perspective distortion effects, by calibrating the perspective transformation coefficients and applying the reverse transformation to the points in the image.
 
 ### theory of perspective transformation
 
-naively, if I wanted to create a perspective-distorted image of some picture, this distortion would have 2 parameters. but since perspective is not the only transformation applied to the picture, and because all these transformation build up on and interact with each other, we end up needing to take them all into account and end up needing 6 parameters for the complete transformation. the parameters are:
+naively, if I wanted to create a perspective-distorted image of some picture, this distortion would have 2 parameters. but since perspective is not the only transformation applied to the picture, and because all these transformations build up on and interact with each other, we end up needing to take them all into account and end up needing 6 parameters for the complete transformation. the parameters are:
 
 |transformation|first parameter|second parameter|
 |:--|:--:|:--:|
@@ -88,15 +88,15 @@ naively, if I wanted to create a perspective-distorted image of some picture, th
 |converting pixels to cm|scale||
 |translating plastic-frame to the center of the image|translation_x|translation_y|
 
-simply put, perspective makes farther things smaller. where "further" corresponds to the distance of the point to the plane of the camera (the geometric height). if we are dealing with a system where all the points to be recorded in the transformed image are constrained to lye on some plane in 3D, than we can derive some relationship between x, y, and the distance from the camera's plane. so you get an affect where things to some direction are shrunk down relative to others. also, since the plane of points is at an angle to the cameras plane, you get that some direction is squished and it's perpendicular direction is not.
+simply put, perspective makes further things smaller. where "further" corresponds to the distance of the point to the plane of the camera (the geometric height). if we are dealing with a system where all the points to be recorded in the transformed image are constrained to lye on some plane in 3D, then we can derive some relationship between x, y, and the distance from the camera's plane. so, you get an effect where things are shrunk down in some direction relative to others. also, since the plane of points is at an angle to the cameras plane, you get that some direction is squished and its perpendicular direction is not.
 
 for more information see [Perspective_Theory](analysis\Perspective_Theory.html)
 
 ### gauging the perspective transformation coefficients
 
-in order to preform the reverse perspective transformation, it is first necessary to find the perspective transformation coefficients. in order to find them, I did the following:
+to preform the reverse perspective transformation, it is first necessary to find the perspective transformation coefficients. to find them, I did the following:
 
-1. I marked 4 points on the corners plastic frame.
+1. I marked 4 points on the corners of the plastic frame.
 2. I measured the distances between every set of two points (6 distances total)
 3. I used the distances I measured, and a global implementation of scipy.minimize, to find the locations of each of these 4 points, with accuracy of 0.1mm.
 4. I wrote and used a script to help me manually mark each of the 4 points on each of the 80 images.
@@ -119,11 +119,11 @@ I feel the need to clarify. I select points in the image, apply the reverse  per
 
 ## extracting points & circle fitting
 
-from [string detection](#string-detection) I have a slightly noisy image of the string,and from [undoing perspective affects](#undoing-perspective-affects) I have a function that when supplied with image coordinate points, gives back real world coordinate points with no perspective affects and in [cm]. what's left is a method to extract points from the image, and a method to fitting circles to the points in real coordinates.
+from [string detection](#string-detection) I have a slightly noisy image of the string, and from [undoing perspective effects](#undoing-perspective-affects) I have a function that when supplied with image coordinate points, gives back real world coordinate points with no perspective effects and in [cm]. what's left is a method to extract points from the image, and a method to fitting circles to the points in real coordinates.
 
 ### extract points from the line detection results
 
-in order to extract points from the image I simply make two sweeps over the picture. the first is a horizontal sweep, in which, for each column I take the point with the highest line detection score. and the second is a vertical sweep, in which, for each row I find and extract the two largest local maxima. after sweeping in both directions, I split the points into two groups, left, and right, and apply the circle fit to each group separately.  
+to extract points from the image I simply make two sweeps over the picture. the first is a horizontal sweep, in which, for each column I take the point with the highest line detection score. and the second is a vertical sweep, in which, for each row I find and extract the two largest local maxima. after sweeping in both directions, I split the points into two groups, left, and right, and apply the circle fit to each group separately.  
 
 ||
 |:---:|
@@ -141,7 +141,7 @@ it is not, in general possible to fit a circle arc with regular function-fit alg
 |10|![](analysis\extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81.png)|![](analysis\extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81leftfit_in_polar.png)|![](analysis\extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81leftfit_on_image.png)|![](analysis\extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81rightfit_in_polar.png)|![](analysis\extract_curviture_v2_circle_fits\10_mw429.3_ms5.61_mp0.81rightfit_on_image.png)|
 |75|![](analysis\extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65.png)|![](analysis\extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65leftfit_in_polar.png)|![](analysis\extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65leftfit_on_image.png)|![](analysis\extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65rightfit_in_polar.png)|![](analysis\extract_curviture_v2_circle_fits\75__mw282.85_ms1.67_mp1.65rightfit_on_image.png)|
 
-you can reed more about my previous less successfully iterations of the analysis in the [Analysis Documentation Page](analysis\analysis_worklog.html)
+you can reed more about my previous less successful iterations of the analysis in the [Analysis Documentation Page](analysis\analysis_worklog.html)
 
 ## results
 

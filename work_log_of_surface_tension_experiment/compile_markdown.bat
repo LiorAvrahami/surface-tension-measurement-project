@@ -1,2 +1,2 @@
-python "E:\Liors_Stuff\Programing M\python\build markdown with pandoc\automate_compile_markdown_with_pandoc.py" "E:\Liors_Stuff\Experimants\soap solution surface tention\worklog_new" -cc
+python "E:\Liors_Stuff\Tools\Programs\build markdown with pandoc\automate_compile_markdown_with_pandoc.py" "E:\Liors_Stuff\Experimants\soap solution surface tention\work_log_of_surface_tension_experiment\worklog_home.md" -cc --link_images --site_map -gou
 PAUSE
