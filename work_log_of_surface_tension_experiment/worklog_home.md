@@ -1,6 +1,10 @@
 # measuring surface tension of soap film with image processing algorithms
 
- *The code used for the processing of this experiment is available at [My Github](https://github.com/LiorAvrahami)
+ *The code used for the processing of this experiment is available at [My Github](https://github.com/LiorAvrahami/surface-tension-measurement-project)
+
+>contact info:  
+ written and conducted by *Lior Avrahami*   
+ email (it's an image to protect against bots): ![image_of_my_email_address](image_of_my_email_address.png)
 
 ## introduction
 
